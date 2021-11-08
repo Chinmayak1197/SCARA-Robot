@@ -1,0 +1,25 @@
+<launch>
+
+	<param name="paused" value="true"/>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	</include>
+
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find foundations_assignment)/urdf/robot.xacro'" />
+
+	<rosparam file="$(find foundations_assignment)/config/config.yaml" command="load"/>
+
+	<node name="spawn_platform" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -model platform -param robot_description" />
+
+	<node name="controller_spawner_stopped" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/vbmbot" args=
+      "--stopped joint1_velocity_controller"/>
+
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/robot" args=
+      "joint_state_controller
+       joint1_position_controller"/>
+
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub" respawn="false" output="screen">
+		<remap from="/joint_states" to="/robot/joint_states" />
+    </node> 
+		
+
+</launch>
