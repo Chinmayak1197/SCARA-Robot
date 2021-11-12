@@ -9,4 +9,26 @@
     </plugin>
   </gazebo>
 
+  <gazebo reference="base_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="link0">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="link1">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="joint2link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="link2">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="joint3link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="link3">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
 </robot>
