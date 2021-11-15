@@ -3,6 +3,9 @@ import numpy as np
 import math as m
 import rospy
 from sensor_msgs.msg import JointState
+from geometry_msgs.msg import Pose
+from tf.transformations import quaternion_from_matrix
+
 L1 = 0.1
 L2 = 1
 L3 = 1 - 0.075
@@ -32,7 +35,20 @@ def forward_kinematics(pt):
     TQ =np.dot(T3,T4)
     TQ1 =np.dot(T2,TQ)
     T = np.dot(T1,TQ1)
-    print(T)
+
+    pose = Pose()
+
+    quat = quaternion_from_matrix(T)
+    pose.orientation.x = quat[0]
+    pose.orientation.y = quat[1]
+    pose.orientation.z = quat[2]
+    pose.orientation.w = quat[3]
+    pose.position.x = T[0][3]
+    pose.position.y = T[1][3]
+    pose.position.z = T[2][3]
+    pub.publish(pose)
+
+    # print(pose)
    
 
 
@@ -41,6 +57,7 @@ if __name__=='__main__':
     try:
         rospy.init_node('Suscriber')
         rospy.Subscriber('/robot/joint_states', JointState, forward_kinematics)
+        pub = rospy.Publisher('/robot/pose', Pose, queue_size=10)
         rospy.spin()
     except rospy.ROSInterruptException:
         pass
