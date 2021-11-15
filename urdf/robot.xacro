@@ -221,7 +221,7 @@
       <parent link="joint3link"/>
       <child link="link3"/>
       <axis xyz="0 0 -1"/>
-      <limit effort="1000" lower="-0.3" upper="0.3" velocity="0.1"/>
+      <limit effort="1000" lower="0" upper="1" velocity="0.2"/>
     </joint>
 
     <gazebo reference="joint3">
@@ -230,21 +230,21 @@
 
     <link name="link3">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="0 0 ${link_3_length/2}" rpy="0 0 0"/>
             <geometry>
                 <cylinder length="${link_3_length}" radius="${link_3_radius}"/>
             </geometry>
         </visual>
 
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="0 0 ${link_3_length/2}" rpy="0 0 0"/>
             <geometry>
                 <cylinder length="${link_3_length}" radius="${link_3_radius}"/>
             </geometry>
         </collision>
 
         <inertial>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="0 0 ${link_3_length/2}" rpy="0 0 0"/>
 			<mass value="1"/>
 			<inertia
 			  ixx="${mass/12*(3*link_3_radius*link_3_radius + link_3_length*link_3_length)}" ixy="0.0" ixz="0.0"
