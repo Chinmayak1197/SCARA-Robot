@@ -19,7 +19,7 @@ def handle_get_joint_values(GetJointValues):
 
     # Need to change the values of a1, a2 and a3.
     a0 = 0.1            #base offset
-    a1 = 1
+    a1 = 1 -0.075
     a2 = 1
     a3 = 1
 
@@ -27,7 +27,9 @@ def handle_get_joint_values(GetJointValues):
     d3 = (a3+a0 - z_pos)
 
     # calculation for theta2
-    A = (x_pos**2 + y_pos**2 - a1**2 - a2**2)/(2*a2*a2) 
+
+    A = (x_pos**2 + y_pos**2 - a1**2 - a2**2)/(2*a1*a2) 
+    # print(A)
     theta_2 = math.atan2(math.sqrt(1-A**2), A)
     
     # calculation for theta1
