@@ -52,13 +52,14 @@
         </inertial>
     </link>
 
-    <joint name="joint1" type="continuous">
+    <joint name="joint1" type="fixed">
       <!-- <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/> -->
       <origin rpy="0 0 0" xyz="0 0 ${base_link_length}"/>
       <parent link="base_link"/>
       <child link="link0"/>
       <axis xyz="0 0 1"/>
       <dynamics damping="0.7"/>
+      <!-- <limit effort="1000" lower="-10" upper="10" velocity="50"/> -->
     </joint>
 
     <link name="link0">
@@ -118,13 +119,13 @@
         </inertial>
     </link>
 
-    <joint name="joint2" type="revolute">
+    <joint name="joint2" type="fixed">
       <!-- <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/> -->
       <origin rpy="0 0 0" xyz="0 ${link_1_length - unit_radius} 0"/>
       <parent link="link1"/>
       <child link="joint2link"/>
       <axis xyz="0 0 1"/>
-      <limit effort="1000" lower="-2.8973" upper="2.8973" velocity="2.1750"/>
+      <!-- <limit effort="1000" lower="-2.8973" upper="2.8973" velocity="2.1750"/> -->
     </joint>
 
     <link name="joint2link">
@@ -222,12 +223,9 @@
       <parent link="joint3link"/>
       <child link="link3"/>
       <axis xyz="0 0 -1"/>
-      <limit effort="1000" lower="0" upper="1" velocity="0.2"/>
+      <limit effort="10000000" lower="0" upper="1" velocity="2"/>
     </joint>
 
-    <gazebo reference="joint3">
-      <implicitSpringDamper>1</implicitSpringDamper>
-    </gazebo>
 
     <link name="link3">
         <visual>
@@ -262,41 +260,41 @@
       <minDepth>0.001</minDepth>
     </gazebo> -->
 
-    <transmission name="tran1">
+    <!-- <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
-      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="motor1">
-      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
-  </transmission>
+  </transmission> -->
 
-  <transmission name="tran2">
+  <!-- <transmission name="tran2">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint2">
-      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="motor2">
-      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
-  </transmission>
+  </transmission> -->
 
   <transmission name="tran3">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="joint3">
-	<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+	<hardwareInterface>EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="motor3">
 	<mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
 
-    <gazebo reference="joint3">
+    <!-- <gazebo reference="joint3">
       <implicitSpringDamper>1</implicitSpringDamper>
-    </gazebo>
+    </gazebo> -->
 
 </robot>
 
