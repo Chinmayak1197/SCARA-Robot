@@ -43,7 +43,7 @@ diffVal = 0
 def plotter(pt):
     global startFlag, start, time, maxVal, settledFlag, pos, riseTimeStartFlag, riseTimeEndFlag, riseTimeStart, riseTimeEnd
 
-    pos = (float)(pt.position[0])
+    pos = (float)(pt.velocity[0])
     if(startFlag):
         listTime.append((time - start)/10**9)
         listPosition.append(pos)
@@ -84,7 +84,7 @@ if __name__=='__main__':
         rospy.init_node('Suscriber')
         start = rospy.Time.now()
         rospy.Subscriber('/robot/joint_states', JointState, plotter)
-        rospy.Subscriber('/robot/joint3_position_controller/command', Float64, get_ref_val)
+        rospy.Subscriber('/robot/joint3_velocity_controller/command', Float64, get_ref_val)
         rospy.Subscriber('/clock', Clock, get_time)
         rospy.spin()
     except rospy.ROSInterruptException:

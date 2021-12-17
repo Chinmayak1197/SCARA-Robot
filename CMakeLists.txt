@@ -62,6 +62,8 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   GetJointValues.srv
+  GetTwist.srv
+  GetJointVelocities.srv
 #   Service2.srv
 )
 
